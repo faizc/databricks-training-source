@@ -227,3 +227,4 @@ class DBAcademyHelper(NestedNamespace):
                 <td><input type="text" value="{value}" style="width: 100%"></td></tr>"""
         html += "</table>"
         displayHTML(html)
+
