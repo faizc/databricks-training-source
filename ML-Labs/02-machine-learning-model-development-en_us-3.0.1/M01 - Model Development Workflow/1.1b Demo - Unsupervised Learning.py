@@ -60,6 +60,11 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![image_1784807278659.png](./image_1784807278659.png "image_1784807278659.png")
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ### Classroom Setup
 # MAGIC
 # MAGIC Run the following cell to configure your working environment for this course.
