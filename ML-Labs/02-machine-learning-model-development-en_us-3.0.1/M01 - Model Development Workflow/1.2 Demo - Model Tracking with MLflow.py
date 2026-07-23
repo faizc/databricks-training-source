@@ -79,6 +79,95 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,MLflow Experiment Tracking - Complete Knowledge Guide
+# MAGIC %md
+# MAGIC
+# MAGIC ## MLflow Experiment Tracking in Databricks — Complete Knowledge Guide
+# MAGIC
+# MAGIC ### What is MLflow Experiment Tracking?
+# MAGIC
+# MAGIC MLflow Experiment Tracking is a component of the MLflow platform that records and organizes machine learning experiments. In Databricks, it is **natively integrated** — every notebook automatically becomes an MLflow experiment, and runs are logged without requiring external infrastructure.
+# MAGIC
+# MAGIC **Core Workflow:**
+# MAGIC 1. Start a **run** (a single execution of model training code)
+# MAGIC 2. Log **parameters**, **metrics**, **artifacts**, and **models** within that run
+# MAGIC 3. Compare runs across experiments to identify the best-performing model
+# MAGIC
+# MAGIC ---
+# MAGIC
+# MAGIC ### Parameters vs. Metrics vs. Model Artifacts
+# MAGIC
+# MAGIC | Component | What It Is | When to Use | Example |
+# MAGIC | --- | --- | --- | --- |
+# MAGIC | **Parameters** | Input configurations that define *how* a model is trained | Log at the start of training | `max_depth=50`, `learning_rate=0.01`, `criterion='gini'` |
+# MAGIC | **Metrics** | Quantitative measurements that evaluate *how well* a model performs | Log after evaluation (can be logged at multiple steps) | `accuracy=0.87`, `f1_score=0.82`, `train_loss=0.34` |
+# MAGIC | **Artifacts** | Any files or objects produced during the run | Log outputs that help interpret or reproduce results | Confusion matrix plots, feature importance charts, saved model files, data samples |
+# MAGIC
+# MAGIC **Key Differences:**
+# MAGIC * **Parameters** are static (set once per run); **metrics** can be logged at multiple steps (e.g., per epoch)
+# MAGIC * **Parameters** describe the experiment *setup*; **metrics** describe the experiment *outcome*
+# MAGIC * **Artifacts** are arbitrary files (images, CSVs, serialized models) — not key-value pairs
+# MAGIC
+# MAGIC **Logging APIs:**
+# MAGIC * `mlflow.log_param()` / `mlflow.log_params()` — single or batch parameter logging
+# MAGIC * `mlflow.log_metric()` / `mlflow.log_metrics()` — single or batch metric logging
+# MAGIC * `mlflow.log_artifact()` — log a local file as an artifact
+# MAGIC * `mlflow.log_figure()` — log an in-memory matplotlib/plotly figure directly
+# MAGIC * `mlflow.sklearn.log_model()` — log a trained model with its flavor
+# MAGIC * `mlflow.log_input()` — log dataset metadata for lineage tracking
+# MAGIC
+# MAGIC ---
+# MAGIC
+# MAGIC ### Autologging vs. Manual Logging
+# MAGIC
+# MAGIC | Feature | Autologging | Manual Logging |
+# MAGIC | --- | --- | --- |
+# MAGIC | Setup | Zero-code (enabled by default on Databricks) | Explicit API calls required |
+# MAGIC | Scope | Logs standard params/metrics for supported libraries | Full control over what gets logged |
+# MAGIC | Custom metrics | Not supported | Fully supported (e.g., business-specific KPIs) |
+# MAGIC | Use case | Quick experiments, prototyping | Production workflows, custom evaluation |
+# MAGIC
+# MAGIC Supported autologging libraries: scikit-learn, XGBoost, LightGBM, TensorFlow/Keras, PyTorch, Spark MLlib, and more.
+# MAGIC
+# MAGIC ---
+# MAGIC
+# MAGIC ### Unity Catalog Integration for Model Governance
+# MAGIC
+# MAGIC Unity Catalog (UC) integration transforms MLflow from a tracking tool into a **governed model registry**:
+# MAGIC
+# MAGIC **How It Works:**
+# MAGIC * Models are registered as `catalog.schema.model_name` (three-level namespace)
+# MAGIC * Enabled via: `mlflow.set_registry_uri("databricks-uc")`
+# MAGIC
+# MAGIC **Governance Benefits:**
+# MAGIC
+# MAGIC | Capability | Without UC | With UC |
+# MAGIC | --- | --- | --- |
+# MAGIC | Access control | Workspace-level only | Fine-grained ACLs (GRANT/REVOKE on models) |
+# MAGIC | Discoverability | Workspace-scoped search | Cross-workspace catalog search |
+# MAGIC | Lineage | Basic run tracking | Full data-to-model lineage (which tables trained which model) |
+# MAGIC | Versioning | Sequential version numbers | Aliases (`champion`, `challenger`) + version tags |
+# MAGIC | Auditing | Limited | Full audit logs via UC |
+# MAGIC | Sharing | Manual export | Cross-workspace access via UC permissions |
+# MAGIC
+# MAGIC **Model Lifecycle with UC:**
+# MAGIC 1. **Register** — `mlflow.sklearn.log_model(registered_model_name="catalog.schema.model")` 
+# MAGIC 2. **Alias** — assign aliases like `@champion` for production-ready versions
+# MAGIC 3. **Govern** — apply GRANT statements to control who can read/deploy the model
+# MAGIC 4. **Deploy** — reference models by alias in serving endpoints for safe rollbacks
+# MAGIC
+# MAGIC ---
+# MAGIC
+# MAGIC ### Best Practices
+# MAGIC
+# MAGIC * Always log the **training dataset** with `mlflow.log_input()` for full reproducibility
+# MAGIC * Use `infer_signature()` to capture input/output schemas with the model
+# MAGIC * Name experiments descriptively (or let the notebook path serve as the experiment name)
+# MAGIC * Log both **train** and **test** metrics to detect overfitting
+# MAGIC * Use **nested runs** (child runs) for hyperparameter tuning to keep the experiment organized
+
+# COMMAND ----------
+
 # MAGIC %run ../Includes/Classroom-Setup-1.2
 
 # COMMAND ----------
@@ -205,7 +294,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 # set the path for mlflow experiment
-mlflow.set_experiment(f"/Users/{DA.username}/Demo-1.2-Model-Tracking-with-MLflow")
+mlflow.set_experiment(f"/Workspace/Users/{DA.username.lower()}/Demo-1.2-Model-Tracking-with-MLflow")
 
 # turn off autologging
 mlflow.sklearn.autolog(disable=True)
