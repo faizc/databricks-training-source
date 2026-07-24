@@ -223,6 +223,8 @@ plt.show()
 # MAGIC ## Fit a Regression Model
 # MAGIC
 # MAGIC To enhance the performance of our regression model, we'll scale our input variables so that they are on a common (standardized) scale. **Standardization ensures that each feature has a mean of 0 and a standard deviation of 1**, which can be beneficial for certain algorithms, including linear regression.
+# MAGIC
+# MAGIC ![image_1784803959925.png](./image_1784803959925.png "image_1784803959925.png")
 
 # COMMAND ----------
 
@@ -273,6 +275,16 @@ print(f"MAPE: {test_mape}")
 # COMMAND ----------
 
 lr_mdl
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![image_1784805731407.png](./image_1784805731407.png "image_1784805731407.png")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![image_1784806013224.png](./image_1784806013224.png "image_1784806013224.png")
 
 # COMMAND ----------
 
@@ -330,6 +342,11 @@ plt.show()
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ![image_1784806356201.png](./image_1784806356201.png "image_1784806356201.png")
+
+# COMMAND ----------
+
 from sklearn.tree import DecisionTreeRegressor, plot_tree
 import matplotlib.pyplot as plt
 
@@ -340,6 +357,11 @@ dt_train_r2 = dt_mdl.score(X_train, y_train)
 dt_test_r2  = dt_mdl.score(X_test,  y_test)
 print(f"Decision Tree — Train R²: {dt_train_r2:.4f}")
 print(f"Decision Tree — Test  R²: {dt_test_r2:.4f}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![image_1784806541485.png](./image_1784806541485.png "image_1784806541485.png")
 
 # COMMAND ----------
 
