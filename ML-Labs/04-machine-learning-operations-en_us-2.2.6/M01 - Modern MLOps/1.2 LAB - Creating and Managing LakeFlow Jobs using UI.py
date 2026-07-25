@@ -1,0 +1,166 @@
+# Databricks notebook source
+# MAGIC %md
+# MAGIC
+# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
+# MAGIC   <img
+# MAGIC     src="https://databricks.com/wp-content/uploads/2018/03/db-academy-rgb-1200px.png"
+# MAGIC     alt="Databricks Learning"
+# MAGIC   >
+# MAGIC </div>
+# MAGIC
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # LAB - Creating and Managing LakeFlow Jobs using UI
+# MAGIC
+# MAGIC In this lab, you will learn how to set up a LakeFlow Job to deploy a machine learning model with manual triggers and email notifications using the Databricks UI. This will involve creating tasks in the LakeFlow Jobs, configuring job dependencies, and enabling email notifications.
+# MAGIC
+# MAGIC **Lab Outline:**
+# MAGIC
+# MAGIC _In this lab, you will complete the following tasks:_
+# MAGIC
+# MAGIC - Create and configure a LakeFlow Jobs with multiple tasks using the UI.
+# MAGIC - Enable email notifications for job status updates.
+# MAGIC - Manually trigger the deployment workflow.
+# MAGIC - Monitor the job run to ensure successful execution.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## REQUIRED - SELECT CLASSIC COMPUTE
+# MAGIC Before executing cells in this notebook, please select your classic compute cluster in the lab. Be aware that **Serverless** is enabled by default.
+# MAGIC Follow these steps to select the classic compute cluster:
+# MAGIC 1. Navigate to the top-right of this notebook and click the drop-down menu to select your cluster. By default, the notebook will use **Serverless**.
+# MAGIC 1. If your cluster is available, select it and continue to the next cell. If the cluster is not shown:
+# MAGIC    - In the drop-down, select **More**.
+# MAGIC    - In the **Attach to an existing compute resource** pop-up, select the first drop-down. You will see a unique cluster name in that drop-down. Please select that cluster.
+# MAGIC
+# MAGIC **NOTE:** If your cluster has terminated, you might need to restart it in order to select it. To do this:
+# MAGIC 1. Right-click on **Compute** in the left navigation pane and select *Open in new tab*.
+# MAGIC 1. Find the triangle icon to the right of your compute cluster name and click it.
+# MAGIC 1. Wait a few minutes for the cluster to start.
+# MAGIC 1. Once the cluster is running, complete the steps above to select your cluster.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Requirements
+# MAGIC
+# MAGIC Please review the following requirements before starting the lesson:
+# MAGIC
+# MAGIC - To run this notebook, you need to use one of the following Databricks runtime(s): `17.3.x-cpu-ml-scala2.13`
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC **Note🚨:** You must complete this lab before running **2.3 LAB – Deploying Models with Jobs and the Databricks CLI**.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Task 1: Create a Databricks Job
+# MAGIC
+# MAGIC 1. **Navigate to Jobs & Pipelines**:
+# MAGIC    - In your Databricks workspace, click on the **Jobs & Pipelines** icon in the left sidebar.
+# MAGIC
+# MAGIC 2. **Create a New Job**:
+# MAGIC    - Click on **Create** in the upper-right corner of the Jobs & Pipelines page and Select **Job**.
+# MAGIC    - Name the job, for example, **"ML Model Training Workflow"**.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Task 2: Add Tasks to the Job:
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC > - ### Task 1: Data Cleaning and Feature Engineering
+# MAGIC > 
+# MAGIC > 1. **Add First Task**:
+# MAGIC >    - Select `Notebook`.
+# MAGIC >    - Name the task: `Data_Cleaning_and_Feature_Engineering`.
+# MAGIC >    - Set **Type** to `Notebook`.
+# MAGIC >    - Set **Source** to `Workspace`.
+# MAGIC >    - Set **Path** to the notebook path: `$/1.2 Lab Pipeline - Data Cleaning and Model Training/1.2a LAB - Data Cleaning and Feature Engineering`.
+# MAGIC >    - Choose an appropriate cluster for this task.
+# MAGIC >    - Click **Create Task**.
+# MAGIC > 
+# MAGIC ![Data_Cleaning_and_Feature_Engineering_Task](../Includes/images/Data_Cleaning_and_Feature_Engineering_Task1.png)
+# MAGIC >
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC > - ### Task 2: Model Training
+# MAGIC > 
+# MAGIC > 2. **Add Second Task**:
+# MAGIC >    - Click on **Add Task --> Notebook**.
+# MAGIC >    - Name the task: `Model_Training`.
+# MAGIC >    - Set **Type** to `Notebook`.
+# MAGIC >    - Set **Source** to `Workspace`.
+# MAGIC >    - Set **Path** to the notebook path: `$/1.2 Lab Pipeline - Data Cleaning and Model Training/1.2b LAB - Model Training and Tracking with MLFlow`.
+# MAGIC >    - Choose the same cluster as the first task.
+# MAGIC >    - Set **Depends on** to `Data_Cleaning_and_Feature_Engineering`.
+# MAGIC >    - Click **Create Task**.
+# MAGIC > 
+# MAGIC <!-- > ![Task 2 Configuration](https://s3.us-west-2.amazonaws.com/files.training.databricks.com/images/Model_Training_Task_2%2B.png) -->
+# MAGIC ![Model_Training_Task](../Includes/images/Model_Training_Task.png)
+# MAGIC >
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Task 3: Enable Email Notifications
+# MAGIC
+# MAGIC 1. **Enable Notifications**:
+# MAGIC    - For task 2, click on **Edit Notification** under **Job Notifications**
+# MAGIC    - Add your email to receive notifications on job status updates.
+# MAGIC
+# MAGIC <!-- ![Email Notification Configuration](https://s3.us-west-2.amazonaws.com/files.training.databricks.com/images/Task+Notification.png) -->
+# MAGIC ![Task+Notification](../Includes/images/Task+Notification.png)
+# MAGIC
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Task 4: Manually Trigger the Job Run
+# MAGIC
+# MAGIC 1. **Run the Job**:
+# MAGIC    - Click on **Run Now** in the top right corner to manually trigger the job.
+# MAGIC <!-- ![Manually_trigger](../Includes/images/Manually_trigger.png) -->
+# MAGIC
+# MAGIC **Optional:** You can also set a scheduled trigger from the Schedules & Triggers option as shown below:
+# MAGIC
+# MAGIC <!-- ![Scheduled Trigger](https://s3.us-west-2.amazonaws.com/files.training.databricks.com/images/Schedules+%26+Triggers.png) -->
+# MAGIC
+# MAGIC ![Schedules+Triggers.png](../Includes/images/Schedules+Triggers.png)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Task 5: Monitor the Job Run
+# MAGIC
+# MAGIC 1. **Navigate to the Runs Tab**:
+# MAGIC    - Go to the **Runs** tab to view current and past job executions.
+# MAGIC
+# MAGIC 2. **View Running Jobs**:
+# MAGIC    - Identify the job with a **Running** status.
+# MAGIC    - Click on the **Start Time** of the run to access detailed information.
+# MAGIC
+# MAGIC 3. **Observe Task Execution**:
+# MAGIC    - Select the **Task** square to observe the execution of individual cells and their outputs.
+# MAGIC    - Continue to explore until the run is fully completed. *It should take about 9-10 minutes*.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Conclusion
+# MAGIC
+# MAGIC In this lab, you have learned how to create and configure a Lakeflow Job with multiple tasks using the Databricks UI. You also enabled email notifications for job status updates and manually triggered the deployment workflow. By monitoring the job run, you ensured successful execution of the tasks. This process helps in automating machine learning workflows, ensuring that data processing and model training are executed seamlessly.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC &copy; 2026 Databricks, Inc. All rights reserved. Apache, Apache Spark, Spark, the Spark Logo, Apache Iceberg, Iceberg, and the Apache Iceberg logo are trademarks of the <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/><br/><a href="https://databricks.com/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://databricks.com/terms-of-use" target="_blank">Terms of Use</a> | <a href="https://help.databricks.com/" target="_blank">Support</a>
