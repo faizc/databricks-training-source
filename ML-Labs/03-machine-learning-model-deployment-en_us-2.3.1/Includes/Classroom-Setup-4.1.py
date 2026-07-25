@@ -35,7 +35,7 @@ def set_experiment_path():
     """
     This sets the experiment path to be used for logging exeperiments for demonstration 4.1
     """
-    experiment_path = f"/Users/{DA.username}/4_1_Real-Time-Deployment"
+    experiment_path = f"/Users/{DA.username.lower()}/4_1_Real-Time-Deployment"
     return experiment_path
 
 # COMMAND ----------
