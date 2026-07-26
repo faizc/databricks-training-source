@@ -236,13 +236,18 @@ w = WorkspaceClient()
 
 # COMMAND ----------
 
+model_name = f"adb_eus_01.{DA.schema_name}.model_4_1_demo"
+print(model_name)
+
+# COMMAND ----------
+
 # Define model name
-model_name = f"dbacademy.{DA.schema_name}.model_4_1_demo"
+model_name = f"adb_eus_01.{DA.schema_name}.model_4_1_demo"
 # Parse model name from UC namespace
 served_model_name =  model_name.split('.')[-1]
 # Define the endpoint name
 endpoint_name = f"ML_AS_03_Demo4_{DA.unique_name('_')}"
-
+print(endpoint_name)
 # Get version of our model registered to UC as a part of the classroom setup
 model_version_champion = client.get_model_version_by_alias(name=model_name, alias="Champion").version # Get champion version
 model_version_challenger = client.get_model_version_by_alias(name=model_name, alias="Challenger").version # Get challenger version

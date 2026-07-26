@@ -1,0 +1,21 @@
+Investigation Report on Unusual Patterns
+========================================
+
+High Cardinality Columns
+------------------------
+The following columns have high cardinality:
+- Column 'ID': Suggested action: reduce cardinality using frequency encoding or target encoding.
+- Column 'Income': Suggested action: reduce cardinality using frequency encoding or target encoding.
+- Column 'ZIP Code': Suggested action: reduce cardinality using frequency encoding or target encoding.
+- Column 'CCAvg': Suggested action: reduce cardinality using frequency encoding or target encoding.
+- Column 'Mortgage': Suggested action: reduce cardinality using frequency encoding or target encoding.
+
+Skewed Distribution Columns
+---------------------------
+The following columns have skewed distributions:
+- Column 'ZIP Code': Suggested action: apply transformations like log, square root, or Box-Cox to reduce skewness.
+- Column 'CCAvg': Suggested action: apply transformations like log, square root, or Box-Cox to reduce skewness.
+- Column 'Mortgage': Suggested action: apply transformations like log, square root, or Box-Cox to reduce skewness.
+- Column 'Personal Loan': Suggested action: apply transformations like log, square root, or Box-Cox to reduce skewness.
+- Column 'Securities Account': Suggested action: apply transformations like log, square root, or Box-Cox to reduce skewness.
+- Column 'CD Account': Suggested action: apply transformations like log, square root, or Box-Cox to reduce skewness.

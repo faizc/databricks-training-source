@@ -266,7 +266,7 @@ def optuna_objective_function(trial):
 # COMMAND ----------
 
 # Set the MLflow experiment name and get the id
-experiment_name = f"/Users/{DA.username}/Hyperparameter_Tuning_with_Optuna_{DA.schema_name}"
+experiment_name = f"/Users/{DA.username.lower()}/Hyperparameter_Tuning_with_Optuna_{DA.schema_name}"
 print(f"Experiment Name: {experiment_name}")
 mlflow.set_experiment(experiment_name)
 experiment_id = mlflow.get_experiment_by_name(experiment_name).experiment_id
