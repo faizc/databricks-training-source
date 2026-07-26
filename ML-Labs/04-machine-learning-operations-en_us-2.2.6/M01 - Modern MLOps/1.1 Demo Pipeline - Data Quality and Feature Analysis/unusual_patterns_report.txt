@@ -1,0 +1,4 @@
+Unusual Patterns Report
+=======================
+High Cardinality Columns: ['ID', 'Income', 'ZIP Code', 'CCAvg', 'Mortgage']
+Skewed Columns: ['ZIP Code', 'CCAvg', 'Mortgage', 'Personal Loan', 'Securities Account', 'CD Account']

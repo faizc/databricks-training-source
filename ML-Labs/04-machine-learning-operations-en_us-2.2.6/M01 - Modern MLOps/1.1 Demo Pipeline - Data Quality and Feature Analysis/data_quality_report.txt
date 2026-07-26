@@ -1,0 +1,7 @@
+Data Quality Report
+===================
+Missing Values:
+Row(ID=0, Age=0, Experience=0, Income=0, ZIP Code=0, Family=0, CCAvg=0, Education=0, Mortgage=0, Personal Loan=0, Securities Account=0, CD Account=0, Online=0, CreditCard=0)
+
+Duplicate rows: 0
+Columns with outliers: []

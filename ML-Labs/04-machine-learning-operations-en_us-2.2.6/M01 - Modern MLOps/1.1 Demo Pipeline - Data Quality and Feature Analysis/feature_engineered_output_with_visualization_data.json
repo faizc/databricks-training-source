@@ -1,0 +1,24 @@
+{
+    "sample_data": [
+        {
+            "Feature": "Income",
+            "Importance": 0.34282753466770416
+        },
+        {
+            "Feature": "Education",
+            "Importance": 0.18723993281536205
+        },
+        {
+            "Feature": "CCAvg",
+            "Importance": 0.16520041952017664
+        },
+        {
+            "Feature": "Family",
+            "Importance": 0.11193157669852277
+        },
+        {
+            "Feature": "CD Account",
+            "Importance": 0.05037503097122454
+        }
+    ]
+}
