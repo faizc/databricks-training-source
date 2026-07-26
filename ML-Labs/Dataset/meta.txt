@@ -1,0 +1,47 @@
+-- ============================================================
+-- 1. Create settings table
+-- ============================================================
+CREATE TABLE IF NOT EXISTS adb_eus_01.ops.meta (
+  owner  STRING,
+  object STRING,
+  key    STRING,
+  value  STRING
+);
+
+-- ============================================================
+-- 2. Insert records into settings
+-- ============================================================
+INSERT INTO adb_eus_01.ops.meta VALUES
+  ('faizchachiya@MngEnvMCAP400170.onmicrosoft.com', NULL, 'username',                    'faizchachiya@MngEnvMCAP400170.onmicrosoft.com'),
+  ('faizchachiya@MngEnvMCAP400170.onmicrosoft.com', NULL, 'catalog_name',                'adb_eus_01'),
+  ('faizchachiya@MngEnvMCAP400170.onmicrosoft.com', NULL, 'schema_name',                 'faizchachiya'),
+  ('faizchachiya@MngEnvMCAP400170.onmicrosoft.com', NULL, 'paths.working_dir',           '/Volumes/adb_eus_01/ops/faizchachiya@MngEnvMCAP400170_onmicrosoft_com'),
+  ('faizchachiya@MngEnvMCAP400170.onmicrosoft.com', NULL, 'warehouse_name',              'shared_warehouse'),
+  ('faizchachiya@MngEnvMCAP400170.onmicrosoft.com', NULL, 'pseudonym',                   'faizchachiya'),
+  ('account users',                           NULL, 'datasets.telco',              'dbacademy_telco.v01'),
+  ('account users',                           NULL, 'paths.datasets.telco',        '/Volumes/dbacademy_telco/v01'),
+  ('account users',                           NULL, 'datasets.cdc_diabetes',       'dbacademy_cdc_diabetes.v01'),
+  ('account users',                           NULL, 'paths.datasets.cdc_diabetes', '/Volumes/dbacademy_cdc_diabetes/v01');
+
+
+
+INSERT INTO adb_eus_01.ops.meta VALUES
+  ('account users',                           NULL, 'datasets.california_housing',              'dbacademy_california_housing.v02'),
+  ('account users',                           NULL, 'paths.datasets.california_housing',        '/Volumes/dbacademy_california_housing/v02'),
+  ('account users',                           NULL, 'datasets.banking',              'dbacademy_banking.v01'),
+  ('account users',                           NULL, 'paths.datasets.banking',        '/Volumes/dbacademy_banking/v01');
+
+
+INSERT INTO adb_eus_01.ops.meta VALUES
+  ('account users',                           NULL, 'datasets.monitoring',              'dbacademy_monitoring.v01'),
+  ('account users',                           NULL, 'paths.datasets.monitoring',        '/Volumes/dbacademy_monitoring/v01');  
+
+INSERT INTO adb_eus_01.ops.meta VALUES
+  ('account users',                           NULL, 'datasets.diabetes_inference',              'dbacademy_diabetes_inference.v01'),
+  ('account users',                           NULL, 'paths.datasets.diabetes_inference',        '/Volumes/dbacademy_diabetes_inference/v01'),
+  ('account users',                           NULL, 'datasets.wine_quality',              'dbacademy_wine_quality.v01'),
+  ('account users',                           NULL, 'paths.datasets.wine_quality',        '/Volumes/dbacademy_wine_quality/v01'),
+  ('account users',                           NULL, 'datasets.airbnb',              'dbacademy_airbnb.v01'),
+  ('account users',                           NULL, 'paths.datasets.airbnb',        '/Volumes/dbacademy_airbnb/v01'),
+  ('account users',                           NULL, 'datasets.covid',              'dbacademy_covid.v01'),
+  ('account users',                           NULL, 'paths.datasets.covid',        '/Volumes/dbacademy_covid/v01')  ;    
